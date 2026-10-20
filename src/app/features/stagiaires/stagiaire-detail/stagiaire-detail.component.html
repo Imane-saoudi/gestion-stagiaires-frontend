@@ -1,0 +1,84 @@
+<div class="container" *ngIf="stagiaire">
+  <div class="header">
+    <h2>Fiche stagiaire — {{ stagiaire.nom }} {{ stagiaire.prenom }}</h2>
+    <div>
+      <button mat-button (click)="retour()">Retour</button>
+      <button mat-raised-button color="primary" (click)="modifier()">Modifier</button>
+    </div>
+  </div>
+
+  <section>
+    <h3>Informations personnelles</h3>
+    <div class="grid">
+      <div><strong>N° Dossier :</strong> {{ stagiaire.numeroDossier }}</div>
+      <div><strong>CIN :</strong> {{ stagiaire.cin }}</div>
+      <div><strong>Sexe :</strong> {{ stagiaire.sexe }}</div>
+      <div><strong>Date de naissance :</strong> {{ stagiaire.dateNaissance | date:'dd/MM/yyyy' }}</div>
+      <div><strong>Nationalité :</strong> {{ stagiaire.nationalite }}</div>
+      <div><strong>Adresse :</strong> {{ stagiaire.adresse }}</div>
+      <div><strong>Ville :</strong> {{ stagiaire.ville }}</div>
+      <div><strong>Téléphone :</strong> {{ stagiaire.telephone }}</div>
+      <div><strong>Email :</strong> {{ stagiaire.email }}</div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Informations académiques</h3>
+    <div class="grid">
+      <div><strong>Université :</strong> {{ stagiaire.universite }}</div>
+      <div><strong>Filière :</strong> {{ stagiaire.filiere }}</div>
+      <div><strong>Niveau d'étude :</strong> {{ stagiaire.niveauEtude }}</div>
+      <div><strong>Diplôme préparé :</strong> {{ stagiaire.diplomePrepare }}</div>
+      <div><strong>Année universitaire :</strong> {{ stagiaire.anneeUniversitaire }}</div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Stage</h3>
+    <div class="grid">
+      <div><strong>Type :</strong> {{ stagiaire.typeStage }}</div>
+      <div><strong>Sujet :</strong> {{ stagiaire.sujetStage }}</div>
+      <div><strong>Date de début :</strong> {{ stagiaire.dateDebut | date:'dd/MM/yyyy' }}</div>
+      <div><strong>Date de fin :</strong> {{ stagiaire.dateFin | date:'dd/MM/yyyy' }}</div>
+      <div><strong>Durée :</strong> {{ stagiaire.duree ? stagiaire.duree + ' jour(s)' : '—' }}</div>
+      <div><strong>Service d'affectation :</strong> {{ stagiaire.serviceAffectation }}</div>
+      <div><strong>Statut :</strong> <app-status-badge [statut]="stagiaire.statut"></app-status-badge></div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Documents</h3>
+    <app-document-upload [stagiaireId]="stagiaireId" (documentAjoute)="charger()"></app-document-upload>
+    <ul class="liste-documents">
+      <li *ngFor="let doc of documents">
+        <span class="doc-info">
+          <strong>{{ doc.type }}</strong> — {{ doc.nomFichier }}
+          <span *ngIf="doc.dateAjout">({{ doc.dateAjout | date:'dd/MM/yyyy' }})</span>
+        </span>
+        <span class="doc-actions">
+          <button mat-icon-button (click)="consulter(doc)" title="Consulter">👁️</button>
+          <button mat-icon-button (click)="telecharger(doc)" title="Télécharger">⬇️</button>
+          <button mat-icon-button (click)="supprimerDocument(doc)" title="Supprimer">🗑️</button>
+        </span>
+      </li>
+      <li *ngIf="documents.length === 0" class="vide">Aucun document ajouté.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Historique des statuts</h3>
+    <table class="historique">
+      <thead>
+        <tr><th>Date</th><th>Ancien statut</th><th>Nouveau statut</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of historique">
+          <td>{{ h.dateModification | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ h.ancienStatut }}</td>
+          <td>{{ h.nouveauStatut }}</td>
+        </tr>
+        <tr *ngIf="historique.length === 0"><td colspan="3" class="vide">Aucun historique.</td></tr>
+      </tbody>
+    </table>
+  </section>
+</div>

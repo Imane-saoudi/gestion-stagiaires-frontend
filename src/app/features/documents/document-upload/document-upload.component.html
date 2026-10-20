@@ -1,0 +1,8 @@
+<div class="upload-box">
+  <select [(ngModel)]="typeDocument">
+    <option value="">-- Type de document --</option>
+    <option *ngFor="let t of typesDocuments" [value]="t">{{ t }}</option>
+  </select>
+  <input type="file" (change)="onFileSelected($event)" />
+  <button mat-raised-button color="primary" (click)="envoyer()">Ajouter</button>
+</div>

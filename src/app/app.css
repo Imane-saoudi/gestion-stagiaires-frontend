@@ -1,0 +1,22 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  height: 42px;
+  width: auto;
+  border-radius: 4px;
+  background: white;
+  padding: 2px;
+}
+
+.page-background {
+  min-height: calc(100vh - 64px);
+  background-image: linear-gradient(rgba(255, 140, 0, 0.82), rgba(230, 100, 0, 0.85)), url('/background-berkane.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 10px 0 40px 0;
+}

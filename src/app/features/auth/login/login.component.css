@@ -1,0 +1,4 @@
+.login-container { max-width: 320px; margin: 80px auto; text-align: center; background: rgba(255,255,255,0.95); padding: 30px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+.login-container form { display: flex; flex-direction: column; gap: 12px; }
+.login-container input { padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+.erreur { color: #c0392b; }

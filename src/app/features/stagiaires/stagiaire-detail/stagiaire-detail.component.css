@@ -1,0 +1,12 @@
+.container { padding: 20px; max-width: 900px; margin: 20px auto; background: rgba(255,255,255,0.94); border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+section { margin-bottom: 24px; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.liste-documents { list-style: none; padding: 0; }
+.liste-documents li { padding: 6px 0; border-bottom: 1px solid #eee; }
+table.historique { width: 100%; border-collapse: collapse; }
+table.historique th, table.historique td { border: 1px solid #eee; padding: 8px; text-align: left; }
+.vide { color: #888; font-style: italic; }
+.liste-documents li { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #eee; }
+.doc-info { flex: 1; }
+.doc-actions { display: flex; gap: 4px; }

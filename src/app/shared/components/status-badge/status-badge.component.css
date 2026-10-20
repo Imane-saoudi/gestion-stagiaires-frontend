@@ -1,0 +1,14 @@
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-attente { background: #fff3cd; color: #856404; }
+.badge-acceptee { background: #d4edda; color: #155724; }
+.badge-refusee { background: #f8d7da; color: #721c24; }
+.badge-encours { background: #cce5ff; color: #004085; }
+.badge-termine { background: #e2e3e5; color: #383d41; }
+.badge-annule { background: #f5c6cb; color: #721c24; }
+.badge-default { background: #eee; color: #333; }

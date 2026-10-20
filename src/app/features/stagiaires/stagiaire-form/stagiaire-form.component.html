@@ -1,0 +1,141 @@
+<div class="container">
+  <h2>{{ isEdition ? 'Modifier le stagiaire' : 'Nouveau stagiaire' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <fieldset>
+      <legend>Informations personnelles</legend>
+      <div class="grid">
+        <div class="champ">
+          <label>CIN *</label>
+          <input type="text" formControlName="cin" (blur)="verifierCin()" />
+          <small class="erreur" *ngIf="champInvalide('cin')">Ce champ est obligatoire.</small>
+          <small class="erreur" *ngIf="cinDejaUtilise">Ce CIN est déjà utilisé par un autre stagiaire.</small>
+        </div>
+        <div class="champ">
+          <label>Nom *</label>
+          <input type="text" formControlName="nom" />
+          <small class="erreur" *ngIf="champInvalide('nom')">Ce champ est obligatoire.</small>
+        </div>
+        <div class="champ">
+          <label>Prénom *</label>
+          <input type="text" formControlName="prenom" />
+          <small class="erreur" *ngIf="champInvalide('prenom')">Ce champ est obligatoire.</small>
+        </div>
+        <div class="champ">
+          <label>Sexe *</label>
+          <select formControlName="sexe">
+            <option value="">-- Choisir --</option>
+            <option value="M">Masculin</option>
+            <option value="F">Féminin</option>
+          </select>
+          <small class="erreur" *ngIf="champInvalide('sexe')">Ce champ est obligatoire.</small>
+        </div>
+        <div class="champ">
+          <label>Date de naissance *</label>
+          <input type="date" formControlName="dateNaissance" />
+          <small class="erreur" *ngIf="champInvalide('dateNaissance')">Ce champ est obligatoire.</small>
+        </div>
+        <div class="champ">
+          <label>Nationalité</label>
+          <input type="text" formControlName="nationalite" />
+        </div>
+        <div class="champ">
+          <label>Adresse</label>
+          <input type="text" formControlName="adresse" />
+        </div>
+        <div class="champ">
+          <label>Ville</label>
+          <input type="text" formControlName="ville" />
+        </div>
+        <div class="champ">
+          <label>Téléphone</label>
+          <input type="text" formControlName="telephone" />
+        </div>
+        <div class="champ">
+          <label>Email *</label>
+          <input type="email" formControlName="email" />
+          <small class="erreur" *ngIf="champInvalide('email')">Email obligatoire et doit être valide.</small>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Informations académiques</legend>
+      <div class="grid">
+        <div class="champ">
+          <label>Université / École *</label>
+          <input type="text" formControlName="universite" />
+          <small class="erreur" *ngIf="champInvalide('universite')">Ce champ est obligatoire.</small>
+        </div>
+        <div class="champ">
+          <label>Filière *</label>
+          <input type="text" formControlName="filiere" />
+          <small class="erreur" *ngIf="champInvalide('filiere')">Ce champ est obligatoire.</small>
+        </div>
+        <div class="champ">
+          <label>Niveau d'étude</label>
+          <input type="text" formControlName="niveauEtude" />
+        </div>
+        <div class="champ">
+          <label>Diplôme préparé</label>
+          <input type="text" formControlName="diplomePrepare" />
+        </div>
+        <div class="champ">
+          <label>Année universitaire</label>
+          <input type="text" formControlName="anneeUniversitaire" placeholder="ex: 2025/2026" />
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Informations relatives au stage</legend>
+      <div class="grid">
+        <div class="champ">
+          <label>Type de stage *</label>
+          <select formControlName="typeStage">
+            <option value="">-- Choisir --</option>
+            <option *ngFor="let t of typeStageOptions" [value]="t">{{ t }}</option>
+          </select>
+          <small class="erreur" *ngIf="champInvalide('typeStage')">Ce champ est obligatoire.</small>
+        </div>
+        <div class="champ">
+          <label>Sujet du stage</label>
+          <input type="text" formControlName="sujetStage" />
+        </div>
+        <div class="champ">
+          <label>Date de début *</label>
+          <input type="date" formControlName="dateDebut" />
+          <small class="erreur" *ngIf="champInvalide('dateDebut')">Ce champ est obligatoire.</small>
+        </div>
+        <div class="champ">
+          <label>Date de fin *</label>
+          <input type="date" formControlName="dateFin" />
+          <small class="erreur" *ngIf="champInvalide('dateFin')">Ce champ est obligatoire.</small>
+        </div>
+        <div class="champ">
+          <label>Durée (calculée automatiquement)</label>
+          <input type="text" [value]="dureeCalculee ? dureeCalculee + ' jour(s)' : '—'" disabled />
+        </div>
+        <div class="champ">
+          <label>Service d'affectation *</label>
+          <input type="text" formControlName="serviceAffectation" />
+          <small class="erreur" *ngIf="champInvalide('serviceAffectation')">Ce champ est obligatoire.</small>
+        </div>
+        <div class="champ">
+          <label>Statut *</label>
+          <select formControlName="statut">
+            <option *ngFor="let s of statutOptions" [value]="s">{{ s }}</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="actions">
+      <button type="button" mat-button (click)="annuler()">Annuler</button>
+      <button type="submit" mat-raised-button color="primary">
+        {{ isEdition ? 'Enregistrer les modifications' : 'Créer le stagiaire' }}
+      </button>
+    </div>
+  </form>
+</div>

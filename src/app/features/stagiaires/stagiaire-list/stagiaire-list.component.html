@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="header">
+    <h2>Liste des stagiaires</h2>
+    <button mat-raised-button color="primary" (click)="nouveau()">+ Nouveau stagiaire</button>
+  </div>
+
+  <div class="recherche">
+    <input type="text" placeholder="CIN" [(ngModel)]="criteres.cin" />
+    <input type="text" placeholder="Nom" [(ngModel)]="criteres.nom" />
+    <input type="text" placeholder="Prénom" [(ngModel)]="criteres.prenom" />
+    <input type="text" placeholder="Université" [(ngModel)]="criteres.universite" />
+    <input type="text" placeholder="Filière" [(ngModel)]="criteres.filiere" />
+    <input type="text" placeholder="Service d'affectation" [(ngModel)]="criteres.serviceAffectation" />
+
+    <select [(ngModel)]="criteres.typeStage">
+      <option value="">-- Type de stage --</option>
+      <option *ngFor="let t of typeStageOptions" [value]="t">{{ t }}</option>
+    </select>
+
+    <select [(ngModel)]="criteres.statut">
+      <option value="">-- Statut --</option>
+      <option *ngFor="let s of statutOptions" [value]="s">{{ s }}</option>
+    </select>
+
+    <button mat-raised-button (click)="rechercher()">Rechercher</button>
+    <button mat-button (click)="reinitialiser()">Réinitialiser</button>
+  </div>
+
+  <div class="tri">
+    <label>Trier par :</label>
+    <select [(ngModel)]="triCritere" (change)="trier()">
+      <option value="">-- Aucun --</option>
+      <option value="nom">Nom</option>
+      <option value="dateDebut">Date de début</option>
+      <option value="universite">Université</option>
+      <option value="serviceAffectation">Service</option>
+      <option value="typeStage">Type de stage</option>
+      <option value="statut">Statut</option>
+    </select>
+    <button mat-button (click)="inverserDirection()" [disabled]="!triCritere">
+      {{ triDirection === 'asc' ? '⬆ Croissant' : '⬇ Décroissant' }}
+    </button>
+  </div>
+
+  <table mat-table [dataSource]="stagiaires" class="mat-elevation-z2">
+    <ng-container matColumnDef="numeroDossier">
+      <th mat-header-cell *matHeaderCellDef>N° Dossier</th>
+      <td mat-cell *matCellDef="let s">{{ s.numeroDossier }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let s">{{ s.nom }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="prenom">
+      <th mat-header-cell *matHeaderCellDef>Prénom</th>
+      <td mat-cell *matCellDef="let s">{{ s.prenom }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="universite">
+      <th mat-header-cell *matHeaderCellDef>Université</th>
+      <td mat-cell *matCellDef="let s">{{ s.universite }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="filiere">
+      <th mat-header-cell *matHeaderCellDef>Filière</th>
+      <td mat-cell *matCellDef="let s">{{ s.filiere }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="typeStage">
+      <th mat-header-cell *matHeaderCellDef>Type de stage</th>
+      <td mat-cell *matCellDef="let s">{{ s.typeStage }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="statut">
+      <th mat-header-cell *matHeaderCellDef>Statut</th>
+      <td mat-cell *matCellDef="let s"><app-status-badge [statut]="s.statut"></app-status-badge></td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let s">
+        <button mat-icon-button (click)="voirDetail(s.id)" title="Voir">👁️</button>
+        <button mat-icon-button (click)="modifier(s.id)" title="Modifier">✏️</button>
+        <button mat-icon-button (click)="supprimer(s.id)" title="Supprimer">🗑️</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <p *ngIf="stagiaires.length === 0" class="vide">Aucun stagiaire trouvé.</p>
+</div>

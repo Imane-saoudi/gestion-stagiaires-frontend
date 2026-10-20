@@ -1,0 +1,12 @@
+.container { padding: 20px; max-width: 900px; margin: 20px auto; background: rgba(255,255,255,0.94); border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+fieldset { border: 1px solid #ddd; border-radius: 6px; margin-bottom: 20px; padding: 16px; }
+legend { font-weight: 600; padding: 0 8px; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.champ { display: flex; flex-direction: column; }
+.champ label { font-size: 13px; margin-bottom: 4px; color: #555; }
+.champ input, .champ select {
+  padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;
+}
+.actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
+.erreur { color: #c0392b; font-size: 12px; margin-top: 2px; }
+.champ input:disabled { background: #f5f5f5; color: #666; }
